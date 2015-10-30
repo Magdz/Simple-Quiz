@@ -13,17 +13,19 @@ import java.util.LinkedList;
  */
 public class QuizForm extends javax.swing.JFrame {
 
-    private LinkedList<Question> Quiz;
+    private final LinkedList<Question> Quiz;
     /**
      * Creates new form QuizForm
      */
     public QuizForm() {
         initComponents();
+        this.Quiz = new LinkedList();
+        StartQuiz.setVisible(false);
         initProgram();
     }
     
     private void initProgram(){
-        this.Quiz = new LinkedList();
+        QuestionPanel.setVisible(false);
         QuestionFeild.setText(null);
         // initShortAnswer
         ShortAnswerRadio.setSelected(false);
@@ -47,6 +49,9 @@ public class QuizForm extends javax.swing.JFrame {
         FirstText.setText(null);
         SecondText.setText(null);
         ThirdText.setText(null);
+        // Start Quiz button
+        if(!Quiz.isEmpty())
+            StartQuiz.setVisible(true);
     }
 
     /**
@@ -87,6 +92,7 @@ public class QuizForm extends javax.swing.JFrame {
         FirstRadio = new javax.swing.JRadioButton();
         SecondRadio = new javax.swing.JRadioButton();
         ThirdRadio = new javax.swing.JRadioButton();
+        StartQuiz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Quiz");
@@ -154,7 +160,7 @@ public class QuizForm extends javax.swing.JFrame {
                 .addComponent(ShotAnswerLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         ShortAnswerPanelLayout.setVerticalGroup(
             ShortAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,6 +315,8 @@ public class QuizForm extends javax.swing.JFrame {
             QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ShortAnswerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(FillinBlankPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TrueFalsePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MultiplePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(QuestionPanelLayout.createSequentialGroup()
                 .addGroup(QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(QuestionPanelLayout.createSequentialGroup()
@@ -317,11 +325,9 @@ public class QuizForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(QuestionFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(QuestionPanelLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addContainerGap()
                         .addComponent(SubmitQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(TrueFalsePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(MultiplePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         QuestionPanelLayout.setVerticalGroup(
             QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,6 +349,14 @@ public class QuizForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        StartQuiz.setFont(new java.awt.Font("Arial Narrow", 1, 12)); // NOI18N
+        StartQuiz.setText("Start Quiz");
+        StartQuiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartQuizActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
@@ -352,16 +366,21 @@ public class QuizForm extends javax.swing.JFrame {
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(QuestionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(MainPanelLayout.createSequentialGroup()
-                        .addComponent(TypeLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ShortAnswerRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FillinBlankRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TrueFalseRadio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MultipleRadio)
-                        .addGap(0, 201, Short.MAX_VALUE)))
+                        .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addComponent(TypeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ShortAnswerRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FillinBlankRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TrueFalseRadio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(MultipleRadio))
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(StartQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
@@ -376,24 +395,32 @@ public class QuizForm extends javax.swing.JFrame {
                     .addComponent(MultipleRadio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(StartQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ShortAnswerRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShortAnswerRadioActionPerformed
+        QuestionPanel.setVisible(true);
         ShortAnswerPanel.setVisible(!ShortAnswerPanel.isVisible());
         FillinBlankPanel.setVisible(false);
         TrueFalsePanel.setVisible(false);
@@ -404,6 +431,7 @@ public class QuizForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ShortAnswerRadioActionPerformed
 
     private void FillinBlankRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillinBlankRadioActionPerformed
+        QuestionPanel.setVisible(true);
         ShortAnswerPanel.setVisible(false);
         FillinBlankPanel.setVisible(!FillinBlankPanel.isVisible());
         TrueFalsePanel.setVisible(false);
@@ -414,6 +442,7 @@ public class QuizForm extends javax.swing.JFrame {
     }//GEN-LAST:event_FillinBlankRadioActionPerformed
 
     private void TrueFalseRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrueFalseRadioActionPerformed
+        QuestionPanel.setVisible(true);
         ShortAnswerPanel.setVisible(false);
         FillinBlankPanel.setVisible(false);
         TrueFalsePanel.setVisible(!TrueFalsePanel.isVisible());
@@ -424,6 +453,7 @@ public class QuizForm extends javax.swing.JFrame {
     }//GEN-LAST:event_TrueFalseRadioActionPerformed
 
     private void MultipleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultipleRadioActionPerformed
+        QuestionPanel.setVisible(true);
         ShortAnswerPanel.setVisible(false);
         FillinBlankPanel.setVisible(false);
         TrueFalsePanel.setVisible(false);
@@ -501,6 +531,11 @@ public class QuizForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitQuestionActionPerformed
 
+    private void StartQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartQuizActionPerformed
+        TheQuiz Quiz = new TheQuiz(this.Quiz);
+        Quiz.setVisible(true);
+    }//GEN-LAST:event_StartQuizActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -559,6 +594,7 @@ public class QuizForm extends javax.swing.JFrame {
     private javax.swing.JPanel ShortAnswerPanel;
     private javax.swing.JRadioButton ShortAnswerRadio;
     private javax.swing.JLabel ShotAnswerLabel;
+    private javax.swing.JButton StartQuiz;
     private javax.swing.JButton SubmitQuestion;
     private javax.swing.JRadioButton ThirdRadio;
     private javax.swing.JTextField ThirdText;

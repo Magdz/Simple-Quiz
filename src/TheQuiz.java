@@ -11,9 +11,10 @@ import java.util.LinkedList;
  *
  * @author Ahmed
  */
-public class TheQuiz extends javax.swing.JFrame {
+public final class TheQuiz extends javax.swing.JFrame {
 
-    private final LinkedList Quiz;
+    private final LinkedList<Question> Quiz;
+    private int Counter;
     
     /**
      * Creates new form TheQuiz
@@ -21,9 +22,21 @@ public class TheQuiz extends javax.swing.JFrame {
      */
     public TheQuiz(LinkedList Quiz) {
         this.Quiz=Quiz;
+        this.Counter=0;
         initComponents();
+        initProblem();
     }
-
+    
+    public void initProblem(){
+        // True False Problem
+        TrueFalsePanel.setVisible(false);
+        TrueRadio.setSelected(false);
+        FalseRadio.setSelected(false);
+        // 
+        ShortAnswerPanel.setVisible(false);
+        FillinBlankPanel.setVisible(false);
+        MultiplePanel.setVisible(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,23 +46,189 @@ public class TheQuiz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        MainPanel = new javax.swing.JPanel();
+        QuestionFeild = new javax.swing.JLabel();
+        NextQuestion = new javax.swing.JButton();
+        TrueFalsePanel = new javax.swing.JPanel();
+        TrueRadio = new javax.swing.JRadioButton();
+        FalseRadio = new javax.swing.JRadioButton();
+        ShortAnswerPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ShortAnswerArea = new javax.swing.JTextArea();
+        FillinBlankPanel = new javax.swing.JPanel();
+        FillinBlankFeild = new javax.swing.JTextField();
+        MultiplePanel = new javax.swing.JPanel();
+        MultipleBox = new javax.swing.JComboBox();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("The Quiz");
+        setResizable(false);
+
+        QuestionFeild.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
+        QuestionFeild.setText("Press Start to start the Quiz");
+
+        NextQuestion.setFont(new java.awt.Font("Arial Narrow", 1, 12)); // NOI18N
+        NextQuestion.setText("Start");
+        NextQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextQuestionActionPerformed(evt);
+            }
+        });
+
+        TrueRadio.setText("True");
+        TrueRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrueRadioActionPerformed(evt);
+            }
+        });
+
+        FalseRadio.setText("False");
+        FalseRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FalseRadioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TrueFalsePanelLayout = new javax.swing.GroupLayout(TrueFalsePanel);
+        TrueFalsePanel.setLayout(TrueFalsePanelLayout);
+        TrueFalsePanelLayout.setHorizontalGroup(
+            TrueFalsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TrueFalsePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TrueRadio)
+                .addGap(18, 18, 18)
+                .addComponent(FalseRadio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        TrueFalsePanelLayout.setVerticalGroup(
+            TrueFalsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TrueFalsePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(TrueRadio)
+                .addComponent(FalseRadio))
+        );
+
+        ShortAnswerArea.setColumns(20);
+        ShortAnswerArea.setRows(5);
+        jScrollPane1.setViewportView(ShortAnswerArea);
+
+        javax.swing.GroupLayout ShortAnswerPanelLayout = new javax.swing.GroupLayout(ShortAnswerPanel);
+        ShortAnswerPanel.setLayout(ShortAnswerPanelLayout);
+        ShortAnswerPanelLayout.setHorizontalGroup(
+            ShortAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        ShortAnswerPanelLayout.setVerticalGroup(
+            ShortAnswerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout FillinBlankPanelLayout = new javax.swing.GroupLayout(FillinBlankPanel);
+        FillinBlankPanel.setLayout(FillinBlankPanelLayout);
+        FillinBlankPanelLayout.setHorizontalGroup(
+            FillinBlankPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FillinBlankFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        FillinBlankPanelLayout.setVerticalGroup(
+            FillinBlankPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(FillinBlankFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout MultiplePanelLayout = new javax.swing.GroupLayout(MultiplePanel);
+        MultiplePanel.setLayout(MultiplePanelLayout);
+        MultiplePanelLayout.setHorizontalGroup(
+            MultiplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(MultipleBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        MultiplePanelLayout.setVerticalGroup(
+            MultiplePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(MultipleBox, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MultiplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FillinBlankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ShortAnswerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(QuestionFeild))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(QuestionFeild)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ShortAnswerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FillinBlankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MultiplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void NextQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextQuestionActionPerformed
+        initProblem();
+        NextQuestion.setText("Next..");
+        if(Counter<=this.Quiz.size()){
+            Question Question = this.Quiz.get(Counter);
+            ++Counter;
+            QuestionFeild.setText(Question.getQuestion());
+            if(Question instanceof TrueFalseQuestion){
+                TrueFalsePanel.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_NextQuestionActionPerformed
+
+    private void TrueRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrueRadioActionPerformed
+        FalseRadio.setSelected(false);
+    }//GEN-LAST:event_TrueRadioActionPerformed
+
+    private void FalseRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FalseRadioActionPerformed
+        TrueRadio.setSelected(false);
+    }//GEN-LAST:event_FalseRadioActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton FalseRadio;
+    private javax.swing.JTextField FillinBlankFeild;
+    private javax.swing.JPanel FillinBlankPanel;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JComboBox MultipleBox;
+    private javax.swing.JPanel MultiplePanel;
+    private javax.swing.JButton NextQuestion;
+    private javax.swing.JLabel QuestionFeild;
+    private javax.swing.JTextArea ShortAnswerArea;
+    private javax.swing.JPanel ShortAnswerPanel;
+    private javax.swing.JPanel TrueFalsePanel;
+    private javax.swing.JRadioButton TrueRadio;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

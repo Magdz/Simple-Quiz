@@ -28,9 +28,7 @@ public class FillInBlankQuestion extends Question<String> {
     
     @Override
     public boolean checkAnswer(String Answer){
-        if(Answer==this.Answer)
-            return true;
-        return false;
+        return Answer.equals(this.Answer);
     }
     
 }

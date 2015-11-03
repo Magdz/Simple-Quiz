@@ -25,7 +25,7 @@ public class MultipleChoiceQuestion extends Question<String> {
     public String getQuestion() {
         String QuestionText = getText()+"\n";
         for(int i=0;i<this.Choices.size();++i)
-            QuestionText+= i+")"+this.Choices.get(i)+"  ";
+            QuestionText+= "    "+(i+1)+")"+this.Choices.get(i)+"  ";
         QuestionText+= "\n Enter the best Choice";
         return QuestionText;
         // Next Version Shuffle

@@ -165,7 +165,7 @@ public final class TheQuiz extends javax.swing.JFrame {
         );
 
         ScoreText.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
-        ScoreText.setText("Press Start to start the Quiz");
+        ScoreText.setText("Result");
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -261,7 +261,6 @@ public final class TheQuiz extends javax.swing.JFrame {
         if(Question instanceof TrueFalseQuestion){
             checkAnswer = Question.checkAnswer(TrueRadio.isSelected());
         }else if(Question instanceof ShortAnswerQuestion){
-            System.out.println(ShortAnswerArea.getText());
             checkAnswer = Question.checkAnswer(ShortAnswerArea.getText());
         }else if(Question instanceof FillInBlankQuestion){
             checkAnswer = Question.checkAnswer(FillinBlankFeild.getText());
@@ -282,7 +281,10 @@ public final class TheQuiz extends javax.swing.JFrame {
         }else if(Question instanceof FillInBlankQuestion){
             FillinBlankPanel.setVisible(true);
         }else if(Question instanceof MultipleChoiceQuestion){
+            MultipleChoiceQuestion MQuestion = (MultipleChoiceQuestion) this.Question;
             MultiplePanel.setVisible(true);
+            for(int i=0;i<MQuestion.getChoices().size();++i)
+                MultipleBox.addItem(MQuestion.getChoices().get(i));
         }    
     }
     

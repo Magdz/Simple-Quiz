@@ -48,5 +48,9 @@ public class MultipleChoiceQuestion extends Question<String> {
         if(check && this.Answer==null)
             this.Answer = Choice;
     }
+
+    public LinkedList getChoices() {
+        return Choices;
+    }
     
 }

@@ -74,7 +74,7 @@ public final class TheQuiz extends javax.swing.JFrame {
         MultipleBox = new javax.swing.JComboBox();
         ScoreText = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("The Quiz");
         setResizable(false);
 

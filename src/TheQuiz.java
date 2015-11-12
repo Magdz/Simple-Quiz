@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public final class TheQuiz extends javax.swing.JFrame {
 
-    private final LinkedList<Question> Quiz;
+    private final QuizList Quizer;
     private int Counter;
     private int Score;
     private boolean AnswerFlag;
@@ -22,10 +22,10 @@ public final class TheQuiz extends javax.swing.JFrame {
     
     /**
      * Creates new form TheQuiz
-     * @param Quiz
+     * @param Quizer
      */
-    public TheQuiz(LinkedList Quiz) {
-        this.Quiz=Quiz;
+    public TheQuiz(QuizList Quizer) {
+        this.Quizer=Quizer;
         this.Counter=0;
         this.Score=0;
         this.AnswerFlag = true;
@@ -237,7 +237,7 @@ public final class TheQuiz extends javax.swing.JFrame {
         AnswerFlag = !AnswerFlag;
         if(AnswerFlag)checkAnswer();
         initProblem();
-        if(Counter != Quiz.size())getQuestion();
+        if(Counter != Quizer.size())getQuestion();
         else FinishUp();
     }//GEN-LAST:event_NextQuestionActionPerformed
 
@@ -271,7 +271,7 @@ public final class TheQuiz extends javax.swing.JFrame {
     }
     
     private void getQuestion(){
-        this.Question = this.Quiz.get(Counter);
+        this.Question = this.Quizer.getQuestion(Counter);
         ++Counter;
         QuestionFeild.setText(Question.getQuestion());
         if(Question instanceof TrueFalseQuestion){

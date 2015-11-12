@@ -13,15 +13,16 @@ import java.util.LinkedList;
  */
 public class QuizForm extends javax.swing.JFrame {
 
-    private final LinkedList<Question> Quiz;
+    private final QuizList Quizer;
     private MysqlDB DB;
     /**
      * Creates new form QuizForm
+     * @param Quizer
      */
-    public QuizForm() {
+    public QuizForm(QuizList Quizer) {
         initComponents();
         DB = new MysqlDB();
-        this.Quiz = new LinkedList();
+        this.Quizer = Quizer;
         StartQuiz.setVisible(false);
         initProgram();
     }
@@ -52,7 +53,7 @@ public class QuizForm extends javax.swing.JFrame {
         SecondText.setText(null);
         ThirdText.setText(null);
         // Start Quiz button
-        if(!Quiz.isEmpty())
+        if(!Quizer.isEmpty())
             StartQuiz.setVisible(true);
     }
 
@@ -496,14 +497,14 @@ public class QuizForm extends javax.swing.JFrame {
                 if(!ShortAnswerArea.getText().isEmpty()){
                     ShortAnswerQuestion Question =
                             new ShortAnswerQuestion(QuestionFeild.getText(), ShortAnswerArea.getText());
-                    this.Quiz.add(Question);
+                    this.Quizer.add(Question);
                     initProgram();
                 }
             }else if(FillinBlankRadio.isSelected()){
                 if(!FillinBlankFeild.getText().isEmpty()){
                     FillInBlankQuestion Question =
                             new FillInBlankQuestion(QuestionFeild.getText(), FillinBlankFeild.getText());
-                    this.Quiz.add(Question);
+                    this.Quizer.add(Question);
                     initProgram();
                 }
             }else if(TrueFalseRadio.isSelected()){
@@ -516,7 +517,7 @@ public class QuizForm extends javax.swing.JFrame {
                     }
                     TrueFalseQuestion Question =
                             new TrueFalseQuestion(QuestionFeild.getText(), Answer);
-                    this.Quiz.add(Question);
+                    this.Quizer.add(Question);
                     initProgram();
                 }
             }else if(MultipleRadio.isSelected()){
@@ -527,7 +528,7 @@ public class QuizForm extends javax.swing.JFrame {
                         Question.addChoice(FirstText.getText(), FirstRadio.isSelected());
                         Question.addChoice(SecondText.getText(), SecondRadio.isSelected());
                         Question.addChoice(ThirdText.getText(), ThirdRadio.isSelected());
-                        this.Quiz.add(Question);
+                        this.Quizer.add(Question);
                         initProgram();
                     }
                 }
@@ -536,8 +537,8 @@ public class QuizForm extends javax.swing.JFrame {
     }//GEN-LAST:event_SubmitQuestionActionPerformed
 
     private void StartQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartQuizActionPerformed
-        TheQuiz Quiz = new TheQuiz(this.Quiz);
-        Quiz.setVisible(true);
+        TheQuiz TheQuiz = new TheQuiz(this.Quizer);
+        TheQuiz.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_StartQuizActionPerformed
 

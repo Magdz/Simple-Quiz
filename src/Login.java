@@ -1,5 +1,4 @@
 
-import javax.swing.JDialog;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,12 +12,16 @@ import javax.swing.JDialog;
  */
 public class Login extends javax.swing.JDialog {
 
+    private final QuizList Quizer = new QuizList();
     /**
      * Creates new form Login
+     * @param parent
+     * @param modal
      */
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Wrong.setVisible(false);
     }
 
     /**
@@ -37,6 +40,7 @@ public class Login extends javax.swing.JDialog {
         StudentLogin = new javax.swing.JButton();
         InstructorLogin = new javax.swing.JButton();
         PasswordFeild = new javax.swing.JPasswordField();
+        Wrong = new javax.swing.JLabel();
 
         setResizable(false);
 
@@ -69,6 +73,12 @@ public class Login extends javax.swing.JDialog {
 
         PasswordFeild.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
+        Wrong.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        Wrong.setForeground(new java.awt.Color(255, 0, 0));
+        Wrong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Wrong.setText("Wrong Username or Password");
+        Wrong.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,10 +103,15 @@ public class Login extends javax.swing.JDialog {
                         .addGap(102, 102, 102))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(InstructorLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(StudentLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(InstructorLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(StudentLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Wrong)
+                        .addGap(90, 90, 90))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +130,9 @@ public class Login extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StudentLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(InstructorLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Wrong, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,14 +141,17 @@ public class Login extends javax.swing.JDialog {
 
     private void InstructorLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructorLoginActionPerformed
         if((UsernameFeild.getText().equalsIgnoreCase("Magdz")) && (PasswordFeild.getText().equalsIgnoreCase("asdasdasd"))){
-            QuizForm QuizForm = new QuizForm();
+            QuizForm QuizForm = new QuizForm(Quizer);
             QuizForm.setVisible(true);
             this.setVisible(false);
+        }
+        else{
+            Wrong.setVisible(true);
         }
     }//GEN-LAST:event_InstructorLoginActionPerformed
 
     private void StudentLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentLoginActionPerformed
-        TheQuiz Quiz = new TheQuiz(null);
+        TheQuiz Quiz = new TheQuiz(Quizer);
         Quiz.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_StudentLoginActionPerformed
@@ -181,6 +201,7 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JPasswordField PasswordFeild;
     private javax.swing.JButton StudentLogin;
     private javax.swing.JTextField UsernameFeild;
+    private javax.swing.JLabel Wrong;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -234,8 +234,7 @@ public final class TheQuiz extends javax.swing.JFrame {
 
     private void NextQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextQuestionActionPerformed
         NextQuestion.setText("Next..");
-        AnswerFlag = !AnswerFlag;
-        if(AnswerFlag)checkAnswer();
+        checkAnswer();
         initProblem();
         if(Counter != Quizer.size())getQuestion();
         else FinishUp();

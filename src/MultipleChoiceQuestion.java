@@ -38,15 +38,21 @@ public class MultipleChoiceQuestion extends Question<String> {
 
     @Override
     public boolean checkAnswer(String Answer) {
-        if(Answer==this.Answer)
-            return true;
-        return false;
+        return this.Answer.equalsIgnoreCase(Answer);
     }
     
     public void addChoice(String Choice, boolean check){
         this.Choices.add(Choice);
         if(check && this.Answer==null)
             this.Answer = Choice;
+    }
+    
+    public void addChoice(String Choice){
+        this.Choices.add(Choice);
+    }
+    
+    public void setAnswer(String Answer){
+        this.Answer = Answer;
     }
 
     public LinkedList getChoices() {

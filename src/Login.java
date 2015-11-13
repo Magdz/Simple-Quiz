@@ -12,7 +12,8 @@
  */
 public class Login extends javax.swing.JDialog {
 
-    private final QuizList Quizer = new QuizList();
+    private final QuizList Quizer;
+    private final MysqlDB DB;
     /**
      * Creates new form Login
      * @param parent
@@ -22,6 +23,8 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Wrong.setVisible(false);
+        DB = new MysqlDB();
+        Quizer = DB.getData();
     }
 
     /**

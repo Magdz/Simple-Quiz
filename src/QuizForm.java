@@ -14,14 +14,12 @@ import java.util.LinkedList;
 public class QuizForm extends javax.swing.JFrame {
 
     private final QuizList Quizer;
-    private MysqlDB DB;
     /**
      * Creates new form QuizForm
      * @param Quizer
      */
     public QuizForm(QuizList Quizer) {
         initComponents();
-        DB = new MysqlDB();
         this.Quizer = Quizer;
         StartQuiz.setVisible(false);
         initProgram();

@@ -16,15 +16,35 @@ public class MysqlDB {
     private Statement statement;
     private ResultSet result;
     private QuizList Quizer;
+    private static int Length;
     
-   public MysqlDB(){
-       Quizer = new QuizList();
+   public MysqlDB(QuizList Quizer){
+       this.Quizer = Quizer;
        try{
            Class.forName("com.mysql.jdbc.Driver");
            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/simple_quiz","root","");
            statement = connection.createStatement();
        }catch(ClassNotFoundException | SQLException e){
            System.out.println("Error: "+e);
+       }
+   }
+   
+   public void setData(QuizList Quizer) throws SQLException{
+       String insert="";
+       for(int i=Length;i<Quizer.size();++i){
+           Question Question = Quizer.getQuestion(i);
+           if(Question instanceof ShortAnswerQuestion){
+               insert = "INSERT INTO shortanswerquestion VALUES ('"+ Question.getText() +"','"+ Question.getAnswer() +"')";
+           }else if(Question instanceof FillInBlankQuestion){
+               insert = "INSERT INTO fillinblankquestion VALUES ('"+ Question.getText() +"','"+ Question.getAnswer() +"')";
+           }else if(Question instanceof TrueFalseQuestion){
+               insert = "INSERT INTO truefalsequestion VALUES ('"+ Question.getText() +"','"+ Question.getAnswer() +"')";
+           }else if(Question instanceof MultipleChoiceQuestion){
+               MultipleChoiceQuestion Multiple = (MultipleChoiceQuestion) Question; 
+               insert = "INSERT INTO multiplechoicequestion VALUES ('"+ Multiple.getText() +"','"+ Multiple.getAnswer() +"'"
+                       + ",'"+ Multiple.getChoices().getFirst() +"','"+ Multiple.getChoices().get(1) +"','"+ Multiple.getChoices().getLast() +"')";
+           }
+           statement.executeUpdate(insert);
        }
    }
    
@@ -49,6 +69,7 @@ public class MysqlDB {
        }catch(Exception e){
            System.out.println("Error: "+e);
        }
+       Length = Quizer.size();
        return Quizer;
    }
    

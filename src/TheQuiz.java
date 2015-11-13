@@ -14,21 +14,22 @@ import java.util.LinkedList;
  */
 public final class TheQuiz extends javax.swing.JFrame {
 
+    private final Login Login;
     private final QuizList Quizer;
     private int Counter;
     private int Score;
-    private boolean AnswerFlag;
     private Question Question;
     
     /**
      * Creates new form TheQuiz
      * @param Quizer
+     * @param Login
      */
-    public TheQuiz(QuizList Quizer) {
+    public TheQuiz(QuizList Quizer,Login Login) {
         this.Quizer=Quizer;
+        this.Login = Login;
         this.Counter=0;
         this.Score=0;
-        this.AnswerFlag = true;
         initComponents();
         initProblem();
     }
@@ -46,6 +47,7 @@ public final class TheQuiz extends javax.swing.JFrame {
         FillinBlankFeild.setText(null);
         // Multiple Choice Problem
         MultiplePanel.setVisible(false);
+        MultipleBox.removeAllItems();
         MultipleBox.setSelectedItem(null);
         // Score Feild
         ScoreText.setVisible(false);
@@ -88,6 +90,8 @@ public final class TheQuiz extends javax.swing.JFrame {
 
         QuestionFeild.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         QuestionFeild.setText("Press Start to start the Quiz");
+        QuestionFeild.setMaximumSize(new java.awt.Dimension(170, 19));
+        QuestionFeild.setMinimumSize(new java.awt.Dimension(170, 19));
 
         TrueRadio.setText("True");
         TrueRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +179,7 @@ public final class TheQuiz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(QuestionFeild)
+                    .addComponent(QuestionFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ShortAnswerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FillinBlankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MultiplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,7 +190,7 @@ public final class TheQuiz extends javax.swing.JFrame {
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(QuestionFeild)
+                .addComponent(QuestionFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,7 +209,7 @@ public final class TheQuiz extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(NextQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -233,6 +237,11 @@ public final class TheQuiz extends javax.swing.JFrame {
     }//GEN-LAST:event_FalseRadioActionPerformed
 
     private void NextQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextQuestionActionPerformed
+        if(NextQuestion.getText()=="Finished"){
+            this.setVisible(false);
+            this.Login.setVisible(true);
+            return;
+        }
         NextQuestion.setText("Next..");
         checkAnswer();
         initProblem();
@@ -242,7 +251,6 @@ public final class TheQuiz extends javax.swing.JFrame {
 
     private void FinishUp(){
         NextQuestion.setText("Finished");
-        NextQuestion.setEnabled(false);
         ScoreText.setVisible(true);
         double Mark = ((double)this.Score)/((double)this.Counter);
         QuestionFeild.setText("You Answered "+Score+" Correct Answers out of "+Counter);

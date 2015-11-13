@@ -23,12 +23,11 @@ public class MultipleChoiceQuestion extends Question<String> {
 
     @Override
     public String getQuestion() {
-        String QuestionText = getText()+"\n";
+        String QuestionText = "<html>"+getText()+"<br/>";
         for(int i=0;i<this.Choices.size();++i)
-            QuestionText+= "    "+(i+1)+")"+this.Choices.get(i)+"  ";
-        QuestionText+= "\n Enter the best Choice";
+            QuestionText+=(i+1)+")"+this.Choices.get(i)+"      ";
+        QuestionText+= "<br/> Enter the best Choice";
         return QuestionText;
-        // Next Version Shuffle
     }
 
     @Override

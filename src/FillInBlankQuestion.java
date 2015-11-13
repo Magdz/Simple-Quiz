@@ -18,7 +18,7 @@ public class FillInBlankQuestion extends Question<String> {
     
     @Override
     public String getQuestion(){
-        return getText()+"\n Fill in the blank.";   
+        return "<html>"+getText()+"<br/> Fill in the blank.";   
     }
     
     @Override

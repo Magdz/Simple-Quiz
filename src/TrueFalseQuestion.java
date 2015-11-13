@@ -18,7 +18,7 @@ public class TrueFalseQuestion extends Question<Boolean> {
     
     @Override
     public String getQuestion(){
-        return getText()+"\n Is this statment true or false?";   
+        return "<html>"+getText()+"<br/> Is this statment true or false?";   
     }
     
     @Override

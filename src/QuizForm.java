@@ -1,5 +1,4 @@
 
-import java.util.LinkedList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,15 +12,17 @@ import java.util.LinkedList;
  */
 public class QuizForm extends javax.swing.JFrame {
 
+    private final Login Login;
     private final QuizList Quizer;
     /**
      * Creates new form QuizForm
      * @param Quizer
+     * @param Login
      */
-    public QuizForm(QuizList Quizer) {
+    public QuizForm(QuizList Quizer,Login Login) {
         initComponents();
+        this.Login = Login;
         this.Quizer = Quizer;
-        StartQuiz.setVisible(false);
         initProgram();
     }
     
@@ -50,9 +51,6 @@ public class QuizForm extends javax.swing.JFrame {
         FirstText.setText(null);
         SecondText.setText(null);
         ThirdText.setText(null);
-        // Start Quiz button
-        if(!Quizer.isEmpty())
-            StartQuiz.setVisible(true);
     }
 
     /**
@@ -93,7 +91,7 @@ public class QuizForm extends javax.swing.JFrame {
         FirstRadio = new javax.swing.JRadioButton();
         SecondRadio = new javax.swing.JRadioButton();
         ThirdRadio = new javax.swing.JRadioButton();
-        StartQuiz = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Quiz");
@@ -350,11 +348,11 @@ public class QuizForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        StartQuiz.setFont(new java.awt.Font("Arial Narrow", 1, 12)); // NOI18N
-        StartQuiz.setText("Start Quiz");
-        StartQuiz.addActionListener(new java.awt.event.ActionListener() {
+        Logout.setFont(new java.awt.Font("Arial Narrow", 1, 12)); // NOI18N
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StartQuizActionPerformed(evt);
+                LogoutActionPerformed(evt);
             }
         });
 
@@ -380,7 +378,7 @@ public class QuizForm extends javax.swing.JFrame {
                                 .addComponent(MultipleRadio))
                             .addGroup(MainPanelLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(StartQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -397,7 +395,7 @@ public class QuizForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StartQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -534,11 +532,11 @@ public class QuizForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SubmitQuestionActionPerformed
 
-    private void StartQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartQuizActionPerformed
-        TheQuiz TheQuiz = new TheQuiz(this.Quizer);
-        TheQuiz.setVisible(true);
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        Quizer.save();
         this.setVisible(false);
-    }//GEN-LAST:event_StartQuizActionPerformed
+        this.Login.setVisible(true);
+    }//GEN-LAST:event_LogoutActionPerformed
 
     
 
@@ -550,6 +548,7 @@ public class QuizForm extends javax.swing.JFrame {
     private javax.swing.JRadioButton FillinBlankRadio;
     private javax.swing.JRadioButton FirstRadio;
     private javax.swing.JTextField FirstText;
+    private javax.swing.JButton Logout;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JLabel MultipleLabel;
     private javax.swing.JPanel MultiplePanel;
@@ -563,7 +562,6 @@ public class QuizForm extends javax.swing.JFrame {
     private javax.swing.JPanel ShortAnswerPanel;
     private javax.swing.JRadioButton ShortAnswerRadio;
     private javax.swing.JLabel ShotAnswerLabel;
-    private javax.swing.JButton StartQuiz;
     private javax.swing.JButton SubmitQuestion;
     private javax.swing.JRadioButton ThirdRadio;
     private javax.swing.JTextField ThirdText;

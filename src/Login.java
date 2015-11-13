@@ -13,7 +13,6 @@
 public class Login extends javax.swing.JDialog {
 
     private final QuizList Quizer;
-    private final MysqlDB DB;
     /**
      * Creates new form Login
      * @param parent
@@ -23,8 +22,7 @@ public class Login extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         Wrong.setVisible(false);
-        DB = new MysqlDB();
-        Quizer = DB.getData();
+        Quizer = new QuizList();
     }
 
     /**
@@ -144,7 +142,7 @@ public class Login extends javax.swing.JDialog {
 
     private void InstructorLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InstructorLoginActionPerformed
         if((UsernameFeild.getText().equalsIgnoreCase("Magdz")) && (PasswordFeild.getText().equalsIgnoreCase("asdasdasd"))){
-            QuizForm QuizForm = new QuizForm(Quizer);
+            QuizForm QuizForm = new QuizForm(Quizer,this);
             QuizForm.setVisible(true);
             this.setVisible(false);
         }
@@ -154,7 +152,7 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_InstructorLoginActionPerformed
 
     private void StudentLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentLoginActionPerformed
-        TheQuiz Quiz = new TheQuiz(Quizer);
+        TheQuiz Quiz = new TheQuiz(Quizer.shuffle(5),this);
         Quiz.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_StudentLoginActionPerformed

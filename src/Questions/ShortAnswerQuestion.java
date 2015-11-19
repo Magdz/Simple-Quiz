@@ -1,3 +1,7 @@
+package Questions;
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,22 +12,22 @@
  *
  * @author Ahmed
  */
-public class FillInBlankQuestion extends Question<String> {
+public class ShortAnswerQuestion extends Question<String> {
     private final String Answer;
 
-    public FillInBlankQuestion(String Text, String Answer) {
+    public ShortAnswerQuestion(String Text, String Answer) {
         super(Text);
         this.Answer = Answer;
     }
     
     @Override
     public String getQuestion(){
-        return "<html>"+getText()+"<br/> Fill in the blank.";   
+       return getText();   
     }
     
     @Override
     public String getAnswer(){
-        return this.Answer;
+       return this.Answer; 
     }
     
     @Override

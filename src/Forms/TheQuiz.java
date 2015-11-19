@@ -1,6 +1,9 @@
+package Forms;
 
+
+import DataStructures.QuizList;
+import Questions.*;
 import java.awt.Color;
-import java.util.LinkedList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -90,8 +93,6 @@ public final class TheQuiz extends javax.swing.JFrame {
 
         QuestionFeild.setFont(new java.awt.Font("Arial Narrow", 1, 16)); // NOI18N
         QuestionFeild.setText("Press Start to start the Quiz");
-        QuestionFeild.setMaximumSize(new java.awt.Dimension(170, 19));
-        QuestionFeild.setMinimumSize(new java.awt.Dimension(170, 19));
 
         TrueRadio.setText("True");
         TrueRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +180,7 @@ public final class TheQuiz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(QuestionFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(QuestionFeild)
                     .addComponent(ShortAnswerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FillinBlankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MultiplePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,7 +191,7 @@ public final class TheQuiz extends javax.swing.JFrame {
             MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(QuestionFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(QuestionFeild)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TrueFalsePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

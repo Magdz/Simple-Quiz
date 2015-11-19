@@ -104,12 +104,6 @@
               <Font name="Arial Narrow" size="16" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Press Start to start the Quiz"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[170, 19]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[170, 19]"/>
-            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="TrueFalsePanel">
